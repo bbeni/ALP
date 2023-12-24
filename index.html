@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fontawesome-free/css/fontawesome.css">
+    <link href="/css/fontawesome-free/css/brands.css" rel="stylesheet">
+    <link href="/css/fontawesome-free/css/solid.css" rel="stylesheet">
+    <script src="/js/cards.js" defer></script>
+</head>
+<body>
+    <div class="container">
+
+    <ul class="card-table" id="cardTable">
+    </ul>
+
+    <div id="addPage">
+
+        <button class="fa fa-plus addpage-btn" onclick="addCard()"></button>  
+        <span> Title <input id="newTitle"> </span>  
+        <span> Desciption <textarea id="newDescr"> </textarea> </span>
+        <button class="fa-solid fa-cancel addpage-btn" onclick="toggleAddCardPage()">
+       </button>    
+    </div>
+
+    <script>
+        function toggleAddCardPage(){
+            var popup = document.getElementById("addPage");
+            popup.classList.toggle("show");
+        }
+    </script>
+
+
+    <div id="navBar">
+        <button class="fa fa-plus add-btn" onclick="toggleAddCardPage()">
+
+        </button>
+        <div id="trashArea">
+            <i class="fa-solid fa-trash"></i>
+        </div>
+    </div>
+
+</div>
+</body>
+</hmtl>

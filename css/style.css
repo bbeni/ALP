@@ -1,0 +1,177 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(242, 250, 253);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.container {
+    width: min(100%, 500px);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    justify-content: space-between;
+    height: 100%;
+    margin-bottom: 50px;
+}
+
+.card-table {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin:0;
+    padding: 0.5em;
+    justify-content: center;
+    border-radius: 1vmin;
+}
+
+.todo-card:nth-child(1) {
+    background-color: rgb(255, 170, 175, 0.8);
+    margin-top: 0em;
+    margin-bottom: 0.5em;
+
+}
+
+.todo-card:nth-child(2) {
+    background-color: rgb(255, 220, 225, 0.6);
+}
+.todo-card:nth-child(3) {
+    background-color: rgb(255, 220, 225, 0.6);
+    margin-bottom: 0.3em;
+}
+
+.todo-card{
+    border-radius: 0.5em;
+    margin: 0.1em;
+    padding-left: 3em;
+    padding-right: 1em;
+    padding: 0.5em;
+    height: 2.6em;
+    aspect-ratio: 9;
+    background-color: rgb(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.todo-content {
+    align-items: center;
+}
+
+.todo-content > .title {
+    color:rgb(12, 34, 42);
+}
+
+.todo-content > .description {
+    color:rgb(134, 103, 115, 0.5);
+    font-size: 0.7em;    
+}
+
+.todo-card:hover {
+    opacity: 0.9;
+}
+
+.todo-card.dragging :where(.todo-content, i) {
+    opacity: 0;
+}
+
+.add-btn {
+    padding: 1.3em;
+    border-radius: 0.5em;
+    border: 0cap;
+    justify-self: center;
+    display: flex;
+    width: 350px;
+    bottom: 1em;
+    background-color: (125, 175, 141, 1);
+}
+
+.addpage-btn {
+    padding: 1.3em;
+    border-radius: 0.5em;
+    border: 0cap;
+    justify-self: center;
+    display: flex;
+    width: 400px;
+    bottom: 1em;
+    background-color: (125, 175, 141, 1);
+}
+
+.add-btn:hover {
+    background-color: beige;
+}
+.add-btn:active {
+    background-color: antiquewhite;
+}
+
+#navBar {
+    position: fixed;
+    width: 100%;
+    left:0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+
+#addPage {
+    visibility:hidden;
+    background-color: yellowgreen;
+    z-index: 1;
+    position:absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    align-items:end;
+    justify-content: flex-end;
+    border-radius: 0.5em;
+}
+
+#addPage span {
+    align-items: center;
+    display: flex;
+}
+
+#addPage button  {
+    height: fit-content;
+    justify-self: stretch;
+}
+
+#addPage input {
+    margin: 0.5em;
+    font-size: larger;
+    border: 0cap;
+    border-radius: 0.3em;
+    width: 260px;
+}
+
+#addPage textarea {
+    margin: 0.5em;
+    font-size: larger;
+    border: 0cap;
+    border-radius: 0.3em;
+    resize: vertical;
+    height: 2.2em;
+    width:260px;
+}
+
+
+#addPage.show {
+    visibility:visible;
+    background-color: rgba(145, 185, 141, 1);
+}
+
+#trashArea {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}

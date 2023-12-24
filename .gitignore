@@ -1,0 +1,10 @@
+
+css/fontawesome-free/*
+!css/fontawesome-free/css
+!css/fontawesome-free/LICENSE.txt
+
+css/fontawesome-free/css/*
+!/css/fontawesome-free/css/solid.css
+!/css/fontawesome-free/css/fontawesome.css
+!/css/fontawesome-free/css/brands.css
+
