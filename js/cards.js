@@ -37,43 +37,6 @@ function updateCardsInStorage() {
 }
 
 
-// event listener for inserting the card into the table while dragging
-const changeCardTable = (e) => {
-    e.preventDefault();
-    const draggingCard = cardTable.querySelector(".dragging")
-    const others = [...cardTable.querySelectorAll(".todo-card:not(.dragging)")];
-    
-    let next = others.find(card => {
-        return e.clientY + window.scrollY <= card.offsetTop + card.offsetHeight /2;
-    })
-    cardTable.insertBefore(draggingCard, next);
-
-}
-
-
-cardTable.addEventListener("dragover", changeCardTable)
-
-
-
-const toTrashMoved = (e) => {
-    e.preventDefault();
-}
-
-const deletedCard = (e) => {
-    e.preventDefault();
-    const draggingCard = cardTable.querySelector(".dragging");
-    if (draggingCard) {
-        draggingCard.remove();
-    }
-
-    
-}
-
-trashArea = document.getElementById("trashArea");
-trashArea.addEventListener("dragover", toTrashMoved)
-trashArea.addEventListener("drop", deletedCard)
-
-
 function addCardAt(index, title, descr){
     const content = `
         <li class="todo-card" draggable="true">
@@ -111,6 +74,41 @@ function addCard() {
 
 }
 
+
+
+// Event listener functions
+function dragStart(e) {
+    setTimeout(() => this.classList.add("dragging"), 0);
+}
+
+function dragEnd(e) {
+    this.classList.remove("dragging");
+    updateCardsInStorage();
+}
+
+// touch listeners
+function touchStart(e) {
+    dragStart.call(this, e.touches[0]);
+}
+
+function touchEnd(e) {
+    dragEnd.call(this, e.changedTouches[0]);
+}
+
+// event listener for inserting the card into the table while dragging
+const changeCardTable = (e) => {
+    e.preventDefault();
+    const draggingCard = cardTable.querySelector(".dragging")
+    const others = [...cardTable.querySelectorAll(".todo-card:not(.dragging)")];
+    
+    let next = others.find(card => {
+        return e.clientY + window.scrollY <= card.offsetTop + card.offsetHeight /2;
+    })
+    cardTable.insertBefore(draggingCard, next);
+
+}
+
+
 // Function to bind drag events to all todo cards
 function bindDragEvents() {
     const todoCards = document.querySelectorAll(".todo-card");
@@ -119,23 +117,53 @@ function bindDragEvents() {
         // Remove existing event listeners to avoid duplicates
         card.removeEventListener("dragstart", dragStart);
         card.removeEventListener("dragend", dragEnd);
+        card.removeEventListener("touchstart", touchStart);
+        card.removeEventListener("toouchend", touchEnd);
 
         // Add new event listeners
         card.addEventListener("dragstart", dragStart);
         card.addEventListener("dragend", dragEnd);
+        card.addEventListener("touchstart", touchStart);
+        card.addEventListener("touchend", touchEnd);
+
     });
 }
 
-// Event listener functions
-function dragStart() {
-    setTimeout(() => this.classList.add("dragging"), 0);
+
+const toTrashMoved = (e) => {
+    e.preventDefault();
 }
 
-function dragEnd() {
-    this.classList.remove("dragging");
-    updateCardsInStorage();
+function touchMoved(e) {
+    toTrashMoved.call(this, e.touches[0]);
 }
 
+const deletedCard = (e) => {
+    e.preventDefault();
+    const draggingCard = cardTable.querySelector(".dragging");
+    if (draggingCard) {
+        draggingCard.remove();
+    }
+}
+
+function changeCardTableTouch(e) {
+    changeCardTable.call(this, e.touches[0]);
+}
+
+trashArea = document.getElementById("trashArea");
+trashArea.addEventListener("dragover", toTrashMoved);
+trashArea.addEventListener("drop", deletedCard);
+trashArea.addEventListener("touchmove", touchMoved);
+trashArea.addEventListener("touchend", deletedCard);
+
+
+
+cardTable.addEventListener("dragover", changeCardTable);
+cardTable.addEventListener("touchmove", changeCardTableTouch);
+
+
+
+// initialize stuff
 genCardsFromStorage();
 bindDragEvents();
 
