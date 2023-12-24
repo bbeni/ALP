@@ -1,7 +1,8 @@
 body {
     padding: 0px;
     margin: 0px;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,7 +54,7 @@ body {
     padding-right: 1em;
     padding: 0.5em;
     height: 2.6em;
-    aspect-ratio: 9;
+    width: min(90vw, 340px);
     background-color: rgb(255, 255, 255, 0.6);
     display: flex;
     align-items: center;
@@ -84,10 +85,10 @@ body {
 .add-btn {
     padding: 1.3em;
     border-radius: 0.5em;
-    border: 0cap;
+    border: 0px;
     justify-self: center;
     display: flex;
-    width: 350px;
+    width: min(75vw, 250px);
     bottom: 1em;
     background-color: (125, 175, 141, 1);
 }
@@ -95,10 +96,10 @@ body {
 .addpage-btn {
     padding: 1.3em;
     border-radius: 0.5em;
-    border: 0cap;
+    border: 0px;
     justify-self: center;
     display: flex;
-    width: 400px;
+    width: min(90vw, 350px);
     bottom: 1em;
     background-color: (125, 175, 141, 1);
 }
@@ -122,13 +123,13 @@ body {
 
 #addPage {
     visibility:hidden;
-    background-color: yellowgreen;
+    background-color: rgba(165, 225, 141, 1);
     z-index: 1;
     position:absolute;
     bottom: 0;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: min(90vw, 350px);
     align-items:end;
     justify-content: flex-end;
     border-radius: 0.5em;
@@ -142,6 +143,7 @@ body {
 #addPage button  {
     height: fit-content;
     justify-self: stretch;
+    border-width: 0px;
 }
 
 #addPage input {
@@ -149,7 +151,7 @@ body {
     font-size: larger;
     border: 0cap;
     border-radius: 0.3em;
-    width: 260px;
+    width: min(50vw, 210px);
 }
 
 #addPage textarea {
@@ -159,17 +161,16 @@ body {
     border-radius: 0.3em;
     resize: vertical;
     height: 2.2em;
-    width:260px;
+    width:min(50vw, 210px);
 }
 
 
 #addPage.show {
     visibility:visible;
-    background-color: rgba(145, 185, 141, 1);
 }
 
-#trashArea {
-    width: 50px;
+.navbarArea {
+    width: min(10vw, 50px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -177,4 +178,15 @@ body {
     border-color: cadetblue;
     border-width: 0.05em;
     border-radius: 0.3em;
+}
+
+#trashArea {
+    border-color: cadetblue; 
+}
+
+
+.debug {
+    background-color: black;
+    border-width: 2px;
+    color: #000;
 }
