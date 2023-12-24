@@ -173,5 +173,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+    border-style: dashed;
+    border-color: cadetblue;
+    border-width: 0.05em;
+    border-radius: 0.3em;
 }
