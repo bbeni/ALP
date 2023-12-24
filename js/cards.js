@@ -108,24 +108,40 @@ const changeCardTable = (e) => {
 
 }
 
+function touchMove(e) {
+    e.preventDefault(); // Prevent default scrolling behavior
+    const touch = e.touches[0];
+    // You may need to adjust this logic for touch coordinates
+    const draggingCard = cardTable.querySelector(".dragging")
+    const others = [...cardTable.querySelectorAll(".todo-card:not(.dragging)")];
 
-// Function to bind drag events to all todo cards
+    let next = others.find(card => {
+        const cardRect = card.getBoundingClientRect();
+        return touch.clientY <= cardRect.top + window.scrollY + cardRect.height / 2;
+    });
+
+    if (draggingCard) {
+        cardTable.insertBefore(draggingCard, next);
+    }
+}
+
+
+
 function bindDragEvents() {
     const todoCards = document.querySelectorAll(".todo-card");
 
     todoCards.forEach(card => {
-        // Remove existing event listeners to avoid duplicates
         card.removeEventListener("dragstart", dragStart);
         card.removeEventListener("dragend", dragEnd);
         card.removeEventListener("touchstart", touchStart);
-        card.removeEventListener("toouchend", touchEnd);
+        card.removeEventListener("touchend", touchEnd);
+        card.removeEventListener("touchmove", touchMove);
 
-        // Add new event listeners
         card.addEventListener("dragstart", dragStart);
         card.addEventListener("dragend", dragEnd);
         card.addEventListener("touchstart", touchStart);
         card.addEventListener("touchend", touchEnd);
-
+        card.addEventListener("touchmove", touchMove);
     });
 }
 
@@ -135,6 +151,7 @@ const toTrashMoved = (e) => {
 }
 
 function touchMoved(e) {
+    e.preventDefault();
     toTrashMoved.call(this, e.touches[0]);
 }
 
@@ -155,7 +172,6 @@ trashArea.addEventListener("dragover", toTrashMoved);
 trashArea.addEventListener("drop", deletedCard);
 trashArea.addEventListener("touchmove", touchMoved);
 trashArea.addEventListener("touchend", deletedCard);
-
 
 
 cardTable.addEventListener("dragover", changeCardTable);
